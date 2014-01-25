@@ -5,6 +5,8 @@ class RatingsController < ApplicationController
 
   def new
     @rating = Rating.new
+    @beers = Beer.all
+    @beers_array = @beers.map { |b| [b, b.id] }
   end
 
   def create
