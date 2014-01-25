@@ -5,8 +5,8 @@
     <tr>
       <th>Name</th>
       <th>Style</th>
+      <th>Rating</th>
       <th>Brewery</th>
-      <th></th>
       <th></th>
       <th></th>
     </tr>
@@ -17,6 +17,13 @@
       <tr>
         <td><%= link_to beer.name, beer %></td>
         <td><%= beer.style %></td>
+        <td>
+          <% if beer.ratings.empty? %>
+            n/a
+          <% else %>
+            <%= beer.average_rating %>
+          <% end %>
+        </td>
         <td><%= link_to beer.brewery.name, beer.brewery %></td>
         <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
         <td><%= link_to 'Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -28,5 +35,3 @@
 <br>
 
 <%= link_to 'New Beer', new_beer_path %>
-<br>
-<%= link_to 'List of breweries', breweries_path %>
