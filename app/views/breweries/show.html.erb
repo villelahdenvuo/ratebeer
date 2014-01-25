@@ -12,6 +12,15 @@
  <% end %>
 </p>
 
-<%= link_to 'Edit', edit_brewery_path(@brewery) %> |
-<%= link_to 'Back', breweries_path %> |
-<%= link_to 'List of beers', beers_path %>
+<p>
+  <strong>Rating:</strong>
+  <% if @brewery.ratings.empty? %>
+    No ratings yet!
+  <% else %>
+    Average of
+    <%= pluralize @brewery.ratings.count, "rating" %>
+    is <%= @brewery.average_rating %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_brewery_path(@brewery) %>
