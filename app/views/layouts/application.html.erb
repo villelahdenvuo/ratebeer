@@ -8,7 +8,14 @@
 </head>
 <body>
 
-<%= yield %>
+<nav>
+<%= link_to 'breweries', breweries_path %>
+<%= link_to 'beers', beers_path %>
+</nav>
+
+<section id="content">
+	<%= yield %>
+</section>
 
 </body>
 </html>

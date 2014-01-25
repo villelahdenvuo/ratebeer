@@ -11,3 +11,28 @@
  *= require_self
  *= require_tree .
  */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+nav {
+  background: #EFEFEF;
+  padding: 10px;
+}
+
+nav a {
+	padding: 10px;
+}
+
+nav a:hover {
+	background: #ABABAB;
+}
+
+#content {
+	margin: 0 10px;
+}
