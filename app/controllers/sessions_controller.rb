@@ -6,10 +6,9 @@ class SessionsController < ApplicationController
       user = User.find_by username: params[:username]
       if not user.nil?
         session[:user_id] = user.id
-        redirect_to user
+        redirect_to user, notice: "Welcome back!"
       else
-        flash[:notice] = "Login failed!"
-        redirect_to :back
+        redirect_to :back, notice: "User #{params[:username]} does not exist!"
       end
     end
 
