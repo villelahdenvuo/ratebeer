@@ -9,6 +9,11 @@ class RatingsController < ApplicationController
   end
 
   def create
+    if current_user.nil?
+      redirect_to :back, notice: 'You have to be logged in to rate.'
+      return
+    end
+
     @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
 
     if @rating.save
@@ -22,7 +27,7 @@ class RatingsController < ApplicationController
 
   def destroy
     rating = Rating.find(params[:id])
-    rating.delete
+    rating.delete if current_user == rating.user
     redirect_to :back
   end
 end

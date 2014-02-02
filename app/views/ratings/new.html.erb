@@ -13,7 +13,11 @@
     </div>
   <% end %>
 
-  <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s) %>
-  score: <%= f.number_field :score %>
-  <%= f.submit %>
+  <% if current_user.nil? %>
+    <p>You have to be logged in to rate.</p>
+  <% else %>
+    <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s) %>
+    score: <%= f.number_field :score %>
+    <%= f.submit %>
+  <% end %>
 <% end %>
