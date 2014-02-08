@@ -5,6 +5,9 @@ describe Beer do
   	beer = Beer.create name:"Testiolut", style:"Laageri"
     expect(beer).to be_valid
     expect(Beer.count).to eq 1
+
+    BeerClub
+    BeerClubsController
   end
   it 'is not saved without a name' do
   	beer = Beer.create style:"Laageri"

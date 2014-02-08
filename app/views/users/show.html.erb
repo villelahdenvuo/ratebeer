@@ -7,17 +7,19 @@
 		<%= @user.username %> has made
 		<%= pluralize @user.ratings.count, 'rating' %>.
 		Average of ratings is <%= @user.average_rating %>.
-		<%= @user.username %>'s favorite style is <%= @user.favorite_style %>
+		<%= @user.username %>'s favorite style is <%= @user.favorite_style %>, favorite beer is <%= @user.favorite_beer.name %> and favorite brewery is <%= @user.favorite_brewery.name %>.
 	<% else %>
 		hasn't rated anything.
 	<% end %>
 </p>
 
-<p>Member of
-	<% @user.beer_clubs.each do |club| %>
-		<%= link_to club.name, club %>
-	<% end %>
-</p>
+<% if @user.beer_clubs.count > 0 %>
+	<p>Member of
+		<% @user.beer_clubs.each do |club| %>
+			<%= link_to club.name, club %>
+		<% end %>
+	</p>
+<% end %>
 
 <ul>
  <% @user.ratings.each do |rating| %>
