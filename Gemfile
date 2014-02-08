@@ -41,6 +41,8 @@ end
 
 group :test do
   gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
