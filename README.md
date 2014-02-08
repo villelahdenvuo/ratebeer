@@ -1,4 +1,4 @@
-# RATEBEER [![Build Status](https://travis-ci.org/tuhoojabotti/ratebeer.png)](https://travis-ci.org/tuhoojabotti/ratebeer)
+# RATEBEER [![Build Status](https://travis-ci.org/tuhoojabotti/ratebeer.png)](https://travis-ci.org/tuhoojabotti/ratebeer) [![Code Climate](https://codeclimate.com/github/tuhoojabotti/ratebeer.png)](https://codeclimate.com/github/tuhoojabotti/ratebeer)
 
 App: http://ratebeer.tuhoojabotti.com/
 
