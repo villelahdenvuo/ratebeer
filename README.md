@@ -1,4 +1,4 @@
-# RATEBEER
+# RATEBEER [![Build Status](https://travis-ci.org/tuhoojabotti/ratebeer.png)](https://travis-ci.org/tuhoojabotti/ratebeer)
 
 App: http://ratebeer.tuhoojabotti.com/
 
