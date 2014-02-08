@@ -4,8 +4,10 @@
 
 <p>
 	<% if @user.ratings.count > 0 %>
-		has made <%= pluralize @user.ratings.count, 'rating' %>.
-		Average of ratings is <%= @user.average_rating %>
+		<%= @user.username %> has made
+		<%= pluralize @user.ratings.count, 'rating' %>.
+		Average of ratings is <%= @user.average_rating %>.
+		<%= @user.username %>'s favorite style is <%= @user.favorite_style %>
 	<% else %>
 		hasn't rated anything.
 	<% end %>
