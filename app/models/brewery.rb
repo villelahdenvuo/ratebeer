@@ -5,8 +5,7 @@ class Brewery < ActiveRecord::Base
 	has_many :ratings, through: :beers
 
   validates :name, presence: true
-  validates :year, numericality: { greater_than_or_equal_to: lambda { |x| Time.now.year },
-                                    less_than_or_equal_to: 2014,
+  validates :year, numericality: { less_than_or_equal_to: ->(_) { Time.now.year },
                                     only_integer: true }
 
 
@@ -15,10 +14,10 @@ class Brewery < ActiveRecord::Base
     puts "established at year #{year}"
     puts "number of beers #{beers.count}"
     puts "number of ratings #{ratings.count}"
-  end	
+  end
 
   def restart
     self.year = 2014
     puts "changed year to #{year}"
-  end  
+  end
 end
