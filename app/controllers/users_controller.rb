@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    if current_user != @user
+    if current_user != @user and not current_user.admin
       redirect_to :back, notice: 'Access denied.'
       return
     end
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if current_user == @user
+    if current_user == @user or current_user.admin
       @user.destroy if current_user == @user
       session[:user_id] = nil
     end

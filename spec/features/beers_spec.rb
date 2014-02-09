@@ -1,14 +1,24 @@
 require 'spec_helper'
+include OwnTestHelper
 
 describe "Beer page" do
 
-  it "has a link to creating a new beer" do
+  it "has a link to creating a new beer if user is signed in" do
+    user = FactoryGirl.create :user
+    sign_in username:user.username, password:"Foobar1"
     visit beers_path
     expect(page).to have_content "New Beer"
   end
 
+  it "no link for creating if not signed in" do
+    visit beers_path
+    expect(page).not_to have_content "New Beer"    
+  end
+
   describe "creating a new beer" do
     before :each do
+      user = FactoryGirl.create :user
+      sign_in username:user.username, password:"Foobar1"      
       FactoryGirl.create :brewery, name: "Koff"
       visit new_beer_path
       select 'Koff', from:'beer[brewery_id]'

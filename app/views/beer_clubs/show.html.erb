@@ -14,3 +14,4 @@
 </ul>
 
 <%= link_to 'Back', beer_clubs_path %>
+<%= link_to('Delete club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' }) if current_user.admin %>

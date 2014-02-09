@@ -32,7 +32,7 @@
  <% end %>
 </ul>
 
-<% if @user == current_user %>
+<% if @user == current_user or current_user.admin %>
 	<%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
 	<%= link_to 'Edit', edit_user_path(@user) %> |
 <% end %>

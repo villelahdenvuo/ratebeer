@@ -19,3 +19,7 @@
     <% end %>
   </tbody>
 </table>
+
+<br>
+
+<%= link_to('Create a club!', new_beer_club_path) unless current_user.nil? %>
