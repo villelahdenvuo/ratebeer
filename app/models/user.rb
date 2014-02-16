@@ -23,9 +23,9 @@ class User < ActiveRecord::Base
 			return nil if ratings.empty?
 			ratings
 				.joins(:beer)
-				.group(:style)
+				.group(:style_id)
 				.order(score: :desc)
-				.limit(1).first.beer.style
+				.limit(1).first.beer.style.name
 		end
 
 		def favorite_brewery
