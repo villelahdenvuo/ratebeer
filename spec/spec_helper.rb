@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'webmock/rspec'
+require 'factory_girl_rails'
 
 I18n.enforce_available_locales = false
 
