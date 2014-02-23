@@ -1,23 +1,28 @@
-<h2>Create new rating</h2>
+<h2>Rate a Beer</h2>
 
-<%= form_for(@rating) do |f| %>
-  <% if @rating.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rating.errors.count, "error") %> prohibited rating from being saved:</h2>
+<div class="col-sm-4">
+  <%= form_for(@rating) do |f| %>
+    <% if @rating.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@rating.errors.count, "error") %> prohibited rating from being saved:</h2>
 
-      <ul>
-      <% @rating.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+        <ul>
+        <% @rating.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if current_user.nil? %>
+      <p>You have to be logged in to rate.</p>
+    <% else %>
+      <label for="beer_id">Beer:</label>
+      <%= f.select(:beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id), {}, { :class => 'form-control' }) %>
+      <label for="score">Score:</label>
+      <%= f.number_field :score, class:'form-control' %>
+      <br>
+      <%= f.submit class:'btn btn-primary' %>
+    <% end %>
   <% end %>
-
-  <% if current_user.nil? %>
-    <p>You have to be logged in to rate.</p>
-  <% else %>
-    <%= f.select :beer_id, options_from_collection_for_select(@beers, :id, :to_s, selected: @rating.beer_id) %>
-    score: <%= f.number_field :score %>
-    <%= f.submit %>
-  <% end %>
-<% end %>
+</div>

@@ -1,13 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @beer.name %>
-</p>
+<h2><%= @beer.name %></h2>
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style.name %>
+  <%= link_to @beer.style.name, @beer.style %>
 </p>
 
 <p>
@@ -27,18 +24,14 @@
 </p>
 
 <% if current_user %>
-
-  <h4>give a rating:</h4>
-
-  <%= form_for(@rating) do |f| %>
+  <%= form_for(@rating, html: {:class => 'form-inline'}) do |f| %>
     <%= f.hidden_field :beer_id %>
-    score: <%= f.number_field :score %>
-    <%= f.submit %>
+    <%= f.number_field :score,
+      class:'form-control',
+      placeholder:'Rate this beer!' %>
+    <%= f.submit "Rate!", class:"btn btn-primary" %>
   <% end %>
 
-  <%= link_to 'Edit', edit_beer_path(@beer) %>
-
+  <br>
+  <%= link_to 'Edit', edit_beer_path(@beer), class:"btn btn-info" if current_user.admin? %>
 <% end %>
-
-<%= link_to 'Edit', edit_beer_path(@beer) %> |
-<%= link_to 'Back', beers_path %>

@@ -1,0 +1,44 @@
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.js"></script>
+
+<script>
+angular.module('BreweryApp', ['ngResource'])
+  .controller('BreweriesController',
+    ['$scope', '$resource', function($scope, $resource) {
+
+  $scope.breweries = $resource('breweries.json').query();
+  $scope.order = 'name';
+}]);
+</script>
+
+<style type="text/css">
+  th {
+    padding: 0 10px;
+  }
+  th > span:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+</style>
+
+<h2>Breweries</h2>
+
+<div ng-app="BreweryApp" ng-controller="BreweriesController">
+  search:  <input ng-model="search" placeholder="name, year...">
+
+  <table>
+    <thead>
+    <th><span ng-click="order='name'">name
+      <i class="fa fa-sort-alpha-asc"></i><span></th>
+    <th><span ng-click="order='year'">year
+      <i class="fa fa-sort-numeric-asc"></i><span></th>
+    <th><span ng-click="order='-count'">beers
+      <i class="fa fa-sort-amount-desc"></i><span></th>
+    </thead>
+    <tr ng-repeat="b in breweries | orderBy:order | filter:search">
+      <td>{{b.name}}</td>
+      <td>{{b.year}}</td>
+      <td>{{b.count}}</td>
+    </tr>
+  </table>
+</div>

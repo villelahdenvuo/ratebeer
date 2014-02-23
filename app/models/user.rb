@@ -14,9 +14,12 @@ class User < ActiveRecord::Base
 							format: { with: /((?=.*\d)(?=.*[A-Z])).+/,
 								message: "must containt a capital letter and a number."}
 
+  def self.top(n)
+    User.all.sort_by{ |b| -b.ratings.count }[0..n-1]
+  end
+
   def favorite_beer
     return nil if ratings.empty?
-    #ratings.sort_by(&:score).last.beer
     ratings.order(score: :desc).limit(1).first.beer
   end
 
@@ -50,5 +53,9 @@ class User < ActiveRecord::Base
   def brewery_average(brewery)
     ratings_of_brewery = ratings.select{ |r| r.beer.brewery==brewery }
     ratings_of_brewery.inject(0.0){ |sum, r| sum+r.score}/ratings_of_brewery.count
+  end
+
+  def to_s
+    "#{username}"
   end
 end

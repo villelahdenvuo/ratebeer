@@ -1,14 +1,35 @@
-<h2>Listing ratings</h2>
+<div class="row">
+	<div class="col-md-4">
+		<h2>Best Beers</h2>
+		<%= render 'list', items: @beers %>
+	</div>
+	<div class="col-md-4">
+		<h2>Best Breweries</h2>
+		<%= render 'list', items: @breweries %>
+	</div>
+	<div class="col-md-4">
+		<h2>Best Styles</h2>
+		<%= render 'list', items: @styles %>
+	</div>
+</div>
 
-<ul>
- <% @ratings.each do |rating| %>
-   <li>
-   		<%= rating %>
-   		<%= link_to rating.user.username, rating.user %>
-   	</li>
- <% end %>
-</ul>
+<div class="row">
+	<div class="col-md-4">
+		<h3>Recent Ratings</h3>
+		<ul>
+		 <% @ratings.each do |rating| %>
+		   <li>
+		   		<%= rating %> by
+		   		<%= link_to rating.user.username, rating.user %>
+		   	</li>
+		 <% end %>
+		</ul>
+	</div>
+	<div class="col-md-4">
+		<h3>Active raters</h3>
+		<%= render 'list', items: @users %>
+	</div>
+</div>
 
-
-
-<%= link_to('New Rating', new_rating_path) unless current_user.nil? %>
+<br>
+<%= link_to('New Rating', new_rating_path, class:'btn btn-primary') unless current_user.nil? %>

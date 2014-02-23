@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Ratebeer</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Ratebeer" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ratebeer" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
 
-<nav>
-<%= link_to 'breweries', breweries_path %>
-<%= link_to 'beers', beers_path %>
-<%= link_to 'styles', styles_path %>
-<%= link_to 'ratings', ratings_path %>
-<%= link_to 'users', users_path %>
-<%= link_to 'clubs', beer_clubs_path %>
-<%= link_to 'search', '/places' %> |
+    <main role="main" class=".container">
+      <%= render 'layouts/messages' %>
 
+      <div class="row">
+        <div class="col-md-8">
+          <%= yield %>
+        </div>
+        <div class="col-md-4">
+          <img src="http://static.squarespace.com/static/5005a359e4b0a8c4361f4b6a/t/527d05b5e4b00ec91674bda7/1392932267173/?format=200w" width="200">
+          <p class="lead text-center">In beer we trust.</p>
+        </div>
+      </div>
 
-<% if current_user.nil? %>
-	<%= link_to 'signup', '/signup' %>
-	<%= link_to 'signin', '/signin' %>
-<% else %>
-	<%= link_to current_user.username, user_path(current_user) %>
-	<%= link_to 'rate a beer', new_rating_path %>
-	<%= link_to 'join a club', new_membership_path %>
-	<%= link_to 'signout', '/signout', method: :delete %>
-<% end %>
-
-<span id="notice"><%= notice %></span>
-</nav>
-
-<section id="content">
-	<%= yield %>
-</section>
-
-</body>
+    </main>
+  </body>
 </html>

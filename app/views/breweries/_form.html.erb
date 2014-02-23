@@ -1,25 +1,32 @@
-<%= form_for(@brewery) do |f| %>
-  <% if @brewery.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@brewery.errors.count, "error") %> prohibited this brewery from being saved:</h2>
+<div class="col-sm-4">
+  <%= form_for(@brewery) do |f| %>
+    <% if @brewery.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@brewery.errors.count, "error") %> prohibited this brewery from being saved:</h2>
 
-      <ul>
-      <% @brewery.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @brewery.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :year %><br>
+      <%= f.number_field :year, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.check_box :active %>
+      <%= f.label :active, "the brewery is active" %>
+    </div>  
+    <div class="actions">
+      <%= f.submit 'Save', class:"btn btn-primary" %>
+      <%= link_to 'Cancel', breweries_path, class:'btn btn-warning' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :year %><br>
-    <%= f.number_field :year %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

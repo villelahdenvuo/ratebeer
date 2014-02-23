@@ -1,29 +1,32 @@
-<%= form_for(@beer) do |f| %>
-  <% if @beer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@beer.errors.count, "error") %> prohibited this beer from being saved:</h2>
+<div class="col-sm-4">
+  <%= form_for(@beer) do |f| %>
+    <% if @beer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@beer.errors.count, "error") %> prohibited this beer from being saved:</h2>
 
-      <ul>
-      <% @beer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @beer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class:"form-control" %>
     </div>
-  <% end %>
+    <div class="form-group">
+      <%= f.label :style_id %><br>
+      <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name), {}, { :class => 'form-control' }%>
+    </div>
+    <div class="form-group">
+      <%= f.label :brewery_id %><br>
+      <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name), {}, { :class => 'form-control' } %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :style_id %><br>
-    <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name)%>
-  </div>
-  <div class="field">
-    <%= f.label :brewery_id %><br>
-    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <%= f.submit "Save", class:"btn btn-primary" %>
+    <%= link_to 'Cancel', beers_path, class:'btn btn-warning' %>
+
+  <% end %>
+</div>

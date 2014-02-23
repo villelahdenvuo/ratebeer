@@ -9,6 +9,13 @@ class Brewery < ActiveRecord::Base
                                     only_integer: true }
 
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil,false] }
+
+  def self.top(n)
+    Brewery.all.sort_by{ |b| -(b.average_rating || 0) }[0..n-1]
+  end
+
 	def print_report
     puts name
     puts "established at year #{year}"
@@ -19,5 +26,9 @@ class Brewery < ActiveRecord::Base
   def restart
     self.year = 2014
     puts "changed year to #{year}"
+  end
+
+  def to_s
+    "#{name} since #{year}"
   end
 end

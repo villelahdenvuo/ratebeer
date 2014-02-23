@@ -15,6 +15,7 @@ class PlacesController < ApplicationController
   	city = Rails.cache.read params[:from_search]
 
   	if city.nil?
+      # TODO: load from beermapping api.
   		redirect_to places_path, notice: "Something went wrong."
   		return
   	end

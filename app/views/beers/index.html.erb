@@ -1,16 +1,11 @@
-<h1>Listing beers</h1>
+<h1>Beers</h1>
 
-<p id="notice"><%= notice %></p>
-
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Style</th>
-      <th>Rating</th>
-      <th>Brewery</th>
-      <th></th>
-      <th></th>
+      <th> <%= link_to 'Name', beers_path(order:"name") %> </th>
+      <th> <%= link_to 'Style', beers_path(order:"style") %> </th>
+      <th> <%= link_to 'Brewery', beers_path(order:"brewery") %> </th>
     </tr>
   </thead>
 
@@ -19,17 +14,12 @@
       <tr>
         <td><%= link_to beer.name, beer %></td>
         <td><%= beer.style.name %></td>
-        <td>
-          <% if beer.ratings.empty? %>
-            n/a
-          <% else %>
-            <%= beer.average_rating %>
-          <% end %>
-        </td>
         <td><%= link_to beer.brewery.name, beer.brewery %></td>
-        <% unless current_user.nil? %>
-          <td><%= link_to 'Edit', edit_beer_path(beer) %></td>
-          <td><%= link_to('Destroy', beer, method: :delete, data: { confirm: 'Are you sure?' }) if current_user.admin %></td>
+        <% unless current_user.nil? or not current_user.admin? %>
+          <td>
+            <%= link_to('Delete', beer, method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class:'btn-sm btn-danger') %></td>
         <% end %>
       </tr>
     <% end %>
@@ -38,4 +28,4 @@
 
 <br>
 
-<%= link_to('New Beer', new_beer_path) unless current_user.nil? %>
+<%= link_to('New Beer', new_beer_path, class:'btn btn-primary') unless current_user.nil? %>

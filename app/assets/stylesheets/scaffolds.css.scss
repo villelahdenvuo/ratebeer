@@ -1,9 +1,14 @@
+html {
+  height: 100%;
+}
+
 body {
   background-color: #fff;
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+  height: 100%;
 }
 
 p, ol, ul, td {
@@ -24,9 +29,11 @@ a {
     color: #666;
   }
   &:hover {
-    color: #fff;
-    background-color: #000;
   }
+}
+
+a.btn, a.btn-sm, a.btn-xs {
+  color: #fff;
 }
 
 div {
