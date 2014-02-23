@@ -23,23 +23,4 @@ describe "Rating" do
     expect(beer1.ratings.count).to eq 1
     expect(beer1.average_rating).to eq 15
   end
-
-  it "rating page shows all ratings" do
-    [10, 10, 20, 50, 3].each do |r|
-      beer1.ratings << FactoryGirl.create(:rating, score: r, user: user)
-    end
-    [5, 10, 2, 1, 3].each do |r|
-      beer2.ratings << FactoryGirl.create(:rating, score: r, user: user)
-    end
-
-    visit ratings_path
-
-    [10, 10, 20, 50, 3].each do |r|
-      expect(page).to have_content "iso 3 was rated a #{r}/50"
-    end
-
-    [5, 10, 2, 1, 3].each do |r|
-      expect(page).to have_content "Karhu was rated a #{r}/50"
-    end
-  end
 end

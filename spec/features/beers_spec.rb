@@ -27,7 +27,7 @@ describe "Beer page" do
     it "creating a new beer with a valid name works" do
       fill_in 'beer_name', with: 'Olunen'
 
-      expect{ click_button 'Create Beer' }
+      expect{ click_button 'Save' }
         .to change{ Beer.count }.by 1
 
       expect(current_path).to eq beers_path
@@ -36,7 +36,7 @@ describe "Beer page" do
     it "creating a new beer with invalid name doesn't work" do
       fill_in 'beer_name', with: ''
 
-      expect{ click_button 'Create Beer' }
+      expect{ click_button 'Save' }
         .not_to change{ Beer.count }
 
       expect(page).to have_content "Name can't be blank"
