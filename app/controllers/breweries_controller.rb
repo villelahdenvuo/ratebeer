@@ -5,8 +5,10 @@ class BreweriesController < ApplicationController
   before_action :skip_if_cached, only:[:index]
 
   def skip_if_cached
-    @order = params[:order] || 'name'
-    return render :index if fragment_exist?( "brewerylist-#{@order}"  )
+    if params[:format] != 'json'
+      @order = params[:order] || 'name'
+      return render :index if fragment_exist? "brewerylist-#{@order}"
+    end
   end
 
   # GET /breweries
