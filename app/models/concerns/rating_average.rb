@@ -3,9 +3,9 @@ module RatingAverage
 	
 	def average_rating
 		if ratings.empty?
-			return 0
+			return 0.0
 		else
-			ratings.inject(0) { |sum, el| sum + el.score } / ratings.size
+			ratings.average(:score)
 		end
 	end
 end

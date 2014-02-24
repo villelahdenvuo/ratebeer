@@ -1,10 +1,17 @@
-<h1>All users</h1>
+<h1>Users</h1>
 
 <table class="table table-hover">
+  <thead>
+    <th> </th>
+    <th> rated beers </th>
+    <th> total ratings </th>
+  </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
+        <td><%= user.beers.uniq.size %></td>
+        <td><%= user.ratings.size %></td>
       </tr>
     <% end %>
   </tbody>

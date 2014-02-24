@@ -6,7 +6,8 @@ angular.module('BreweryApp', ['ngResource'])
   .controller('BreweriesController',
     ['$scope', '$resource', function($scope, $resource) {
 
-  $scope.breweries = $resource('breweries.json').query();
+  $scope.breweries = $resource('breweries.json').get();
+
   $scope.order = 'name';
 }]);
 </script>
@@ -21,12 +22,12 @@ angular.module('BreweryApp', ['ngResource'])
   }
 </style>
 
-<h2>Breweries</h2>
-
 <div ng-app="BreweryApp" ng-controller="BreweriesController">
-  search:  <input ng-model="search" placeholder="name, year...">
+  <br>
+  <p>search:  <input ng-model="search" placeholder="name, year..."></p>
 
-  <table>
+  <h2>Active Breweries</h2>
+  <table class="table table-hover">
     <thead>
     <th><span ng-click="order='name'">name
       <i class="fa fa-sort-alpha-asc"></i><span></th>
@@ -35,10 +36,26 @@ angular.module('BreweryApp', ['ngResource'])
     <th><span ng-click="order='-count'">beers
       <i class="fa fa-sort-amount-desc"></i><span></th>
     </thead>
-    <tr ng-repeat="b in breweries | orderBy:order | filter:search">
+    <tr ng-repeat="b in breweries.active | orderBy:order | filter:search">
       <td>{{b.name}}</td>
       <td>{{b.year}}</td>
       <td>{{b.count}}</td>
     </tr>
   </table>
+  <h2>Retired Breweries</h2>
+  <table class="table table-hover">
+    <thead>
+    <th><span ng-click="order='name'">name
+      <i class="fa fa-sort-alpha-asc"></i><span></th>
+    <th><span ng-click="order='year'">year
+      <i class="fa fa-sort-numeric-asc"></i><span></th>
+    <th><span ng-click="order='-count'">beers
+      <i class="fa fa-sort-amount-desc"></i><span></th>
+    </thead>
+    <tr ng-repeat="b in breweries.retired | orderBy:order | filter:search">
+      <td>{{b.name}}</td>
+      <td>{{b.year}}</td>
+      <td>{{b.count}}</td>
+    </tr>
+  </table>  
 </div>

@@ -1,27 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% cache @beer do %>
+  <h2><%= @beer.name %></h2>
 
-<h2><%= @beer.name %></h2>
+  <p>
+    <strong>Style:</strong>
+    <%= link_to @beer.style.name, @beer.style %>
+  </p>
 
-<p>
-  <strong>Style:</strong>
-  <%= link_to @beer.style.name, @beer.style %>
-</p>
+  <p>
+    <strong>Brewery:</strong>
+    <%= link_to @beer.brewery.name, @beer.brewery %>
+  </p>
 
-<p>
-  <strong>Brewery:</strong>
-  <%= link_to @beer.brewery.name, @beer.brewery %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <% if @beer.ratings.empty? %>
-    No ratings yet!
-  <% else %>
-    Average of
-    <%= pluralize @beer.ratings.count, "rating" %>
-    is <%= @beer.average_rating %>
-  <% end %>
-</p>
+  <p>
+    <strong>Rating:</strong>
+    <% if @beer.ratings.empty? %>
+      No ratings yet!
+    <% else %>
+      Average of
+      <%= pluralize @beer.ratings.count, "rating" %>
+      is <%= round @beer.average_rating %>
+    <% end %>
+  </p>
+<% end %>
 
 <% if current_user %>
   <%= form_for(@rating, html: {:class => 'form-inline'}) do |f| %>
@@ -33,5 +33,5 @@
   <% end %>
 
   <br>
-  <%= link_to 'Edit', edit_beer_path(@beer), class:"btn btn-info" if current_user.admin? %>
+  <%= edit_and_destroy_buttons_for @beer %>
 <% end %>

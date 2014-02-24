@@ -19,8 +19,4 @@
 <% end %>
 
 <br>
-
-<% if current_user and current_user.admin %>
-	<%= link_to 'Edit Club', edit_beer_club_path(@beer_club), class:"btn btn-info" %>
-	<%= link_to('Delete Club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger') %>
-<% end %>
+<%= edit_and_destroy_buttons_for @beer_club %>

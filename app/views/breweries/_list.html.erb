@@ -11,12 +11,6 @@
       <tr>
         <td><%= link_to brewery.name, brewery %></td>
         <td><%= brewery.year %></td>
-        <% unless current_user.nil? or not current_user.admin? %>
-          <td>
-            <%= link_to('Delete', brewery, method: :delete,
-              data: { confirm: 'Are you sure?' },
-              class:'btn-sm btn-danger') %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
